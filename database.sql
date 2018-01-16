@@ -1,15 +1,14 @@
-CREATE DATABASE tasks;
-
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
-    task_name varchar(255),
-    task_desc varchar(255)
+    name varchar(255) NOT NULL,
+    description varchar(255) NOT NULL
 );
 
-drop table tasks;
+INSERT INTO tasks (name, description) VALUES ('Laundry', 'Bedding and clothes');
+INSERT INTO tasks (name, description) VALUES ('Dishes', 'plates, silverware and pots');
 
 select * from tasks;
 
-INSERT INTO tasks (task_name, task_desc) VALUES ('Laundry', 'Bedding and clothes');
-INSERT INTO tasks (task_name, task_desc) VALUES ('Paint', 'Bedroom trim');
+-- drop table tasks;
 
+DELETE from tasks where id = 9;
