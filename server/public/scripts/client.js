@@ -2,21 +2,14 @@ console.log('js');
 
 $(document).ready(function () {
   console.log('JQ');
-  console.log($('.deleteTask').data());
-  console.log($('.editTask').data());
-
-
 
   // load existing tasks
   getTasks();
-  console.log(getTasks);
-  
 
   // add task button click
   $('#addButton').on('click', newTask); //end addButton on click
   $('#viewTasks').on('click', '.editTask', editTasks);
   $('#viewTasks').on('click', '.deleteTask', deleteTask);
-
 }); // end doc ready
 
 function newTask() {
@@ -25,7 +18,6 @@ function newTask() {
   // using a test object
   let name = $('#name').val();
   let description = $('#description').val();
-  console.log(taskId);
 
   if (checkInputs(name)) {
     var objectToSend = {
@@ -44,7 +36,7 @@ function updateTasks() {
 
   console.log(task);
   if (checkInputs(task)) {
-    let taskId = $(this).val();
+    let taskId = $(this).parents("tr").data().id;
     console.log(tasksId);
     let objectToUpdate = {
       name: name,
@@ -79,7 +71,7 @@ function editTasks() {
   $('#addButton').on('click', updateTasks);
 
   let editDiv = $('#editTasks');
-  let taskId = $(this).val();
+  let taskId = $(this).parents("tr").data().id;
 
   $.ajax({
     url: '/tasks/' + taskId,
@@ -111,7 +103,6 @@ function getTasks() {
     type: 'GET',
     success: function (data) {
       console.log('got task: ', data);
-      console.log((data).id);
       
       displayTasks(data);
     } // end success
@@ -120,7 +111,6 @@ function getTasks() {
 } // end getTasks
 
 function displayTasks(data) {
-  console.log((data).name);
 
   $('#viewTasks').empty();
 
